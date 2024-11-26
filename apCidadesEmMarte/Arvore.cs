@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -104,7 +105,7 @@ public class Arvore<Dado> where Dado : IComparable<Dado>, IRegistro, new()
 
     public void DesenharArvore(int x, int y, Graphics g)
     {
-        DesenharArvore(true, this.raiz, x, y, Math.PI / 2, 1, 300, g);
+        DesenharArvore(true, this.raiz, x, y, Math.PI / 2, 1, 350, g);
     }
 
     private void DesenharArvore(bool primeiraVez, NoArvore<Dado> noAtual,
@@ -131,10 +132,15 @@ public class Arvore<Dado> where Dado : IComparable<Dado>, IRegistro, new()
                            incremento * 0.60, comprimento * 0.8, g);
 
             SolidBrush preenchimento = new SolidBrush(Color.DeepPink);
-            g.FillEllipse(preenchimento, xf - 21, yf - 15, 42, 30);
+            g.FillEllipse(preenchimento, xf-45, yf-25, 90, 50);
 
-            g.DrawString(Convert.ToString(noAtual.Info.ToString()), new Font("Comic Sans", 10),
-            new SolidBrush(Color.White), xf - 15, yf - 7);
+            Font fonte = new Font("Comic-Sans", 10);
+            SizeF tamanho = g.MeasureString(noAtual.Info.ToString(), fonte);
+
+            float xTexto = xf - (tamanho.Width / 2);
+            float yTexto = yf - (tamanho.Height / 2);
+
+            g.DrawString(noAtual.Info.ToString(), fonte, new SolidBrush(Color.White), xTexto, yTexto);
         }
     }
 

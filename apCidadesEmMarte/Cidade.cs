@@ -22,9 +22,27 @@ public class Cidade : IComparable<Cidade>, IRegistro
         }
     }
 
-    public double X => this.x;
+    public double X
+    {
+        get => this.x;
+        set
+        {
+            if (value > 1 || value < 0)
+                throw new Exception("Coordenada inválida!");
+            this.x = value;
+        }
+    }
 
-    public double Y => this.y;
+    public double Y 
+    {
+        get => this.y;
+        set
+        {
+            if (value > 1 || value < 0)
+                throw new Exception("Coordenada inválida!");
+            this.y = value;
+        }
+    }
 
     public ListaSimples<Caminho> Caminhos => this.caminhos;
 
@@ -34,12 +52,12 @@ public class Cidade : IComparable<Cidade>, IRegistro
 
     public Cidade() { }
 
-    public Cidade(string nome, double x, double y, ListaSimples<Caminho> caminhos)
+    public Cidade(string nome, double x, double y)
     {
         this.Nome = nome;
         this.x = x;
         this.y = y;
-        this.caminhos = caminhos;
+        this.caminhos = new ListaSimples<Caminho>();
     }
 
     public void LerRegistro(BinaryReader arquivo, long qualRegistro)
@@ -89,6 +107,11 @@ public class Cidade : IComparable<Cidade>, IRegistro
 
     public int CompareTo(Cidade outra)
     {
-        return this.nome.CompareTo(outra.nome); 
+        return this.nome.Trim().CompareTo(outra.nome.Trim()); 
+    }
+
+    public override String ToString()
+    {
+        return nome.Trim();
     }
 }

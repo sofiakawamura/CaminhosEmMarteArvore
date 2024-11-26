@@ -8,3 +8,13 @@ C:\Users\u23157\Documents\Projetos_ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj
 C:\Users\u23157\Documents\Projetos_ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.csproj.CoreCompileInputs.cache
 C:\Users\u23157\Documents\Projetos_ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.exe
 C:\Users\u23157\Documents\Projetos_ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.pdb
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\bin\Debug\apCidadesEmMarte.exe.config
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\bin\Debug\apCidadesEmMarte.exe
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\bin\Debug\apCidadesEmMarte.pdb
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.csproj.AssemblyReference.cache
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.FrmCidades.resources
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.Properties.Resources.resources
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.csproj.GenerateResource.cache
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.csproj.CoreCompileInputs.cache
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.exe
+C:\Users\u23157\Documents\Tecnico\ED\CaminhosEmMarteArvore\apCidadesEmMarte\obj\Debug\apCidadesEmMarte.pdb
