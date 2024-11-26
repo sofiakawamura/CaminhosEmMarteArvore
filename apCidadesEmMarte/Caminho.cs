@@ -13,7 +13,7 @@ public class Caminho : IComparable<Caminho>, IRegistro
 
     public string CidadeOrigem 
     { 
-        get => cidadeOrigem.Trim(); 
+        get => cidadeOrigem.Trim().Trim('\0'); 
         set
         {
             cidadeOrigem = value.PadRight(tamanhoNome, ' ').Substring(0, tamanhoNome);
@@ -22,7 +22,7 @@ public class Caminho : IComparable<Caminho>, IRegistro
 
     public string CidadeDestino 
     { 
-        get => cidadeDestino.Trim(); 
+        get => cidadeDestino.Trim().Trim('\0'); 
         set
         {
             cidadeDestino = value.PadRight(tamanhoNome, ' ').Substring(0, tamanhoNome);
@@ -145,7 +145,7 @@ public class Caminho : IComparable<Caminho>, IRegistro
 
     public int CompareTo(Caminho outro)
     {
-        if (cidadeOrigem == outro.cidadeOrigem && cidadeDestino == outro.cidadeDestino)
+        if (CidadeOrigem == outro.CidadeOrigem && CidadeDestino == outro.CidadeDestino)
             return 0;
         return -1;
     }

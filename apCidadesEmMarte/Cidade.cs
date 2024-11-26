@@ -15,7 +15,7 @@ public class Cidade : IComparable<Cidade>, IRegistro
 
     public string Nome
     {
-        get => this.nome.Trim();
+        get => this.nome.Trim().Trim('\0');
         set
         {
             this.nome = value.PadRight(tamanhoNome, ' ').Substring(0, tamanhoNome);
@@ -96,7 +96,7 @@ public class Cidade : IComparable<Cidade>, IRegistro
         {
             char[] nomeChar = new char[tamanhoNome];
             for (int i = 0; i < tamanhoNome; i++)
-                nomeChar[i] = Nome[i];
+                nomeChar[i] = nome[i];
             arquivo.Write(nomeChar);
 
             arquivo.Write(x);

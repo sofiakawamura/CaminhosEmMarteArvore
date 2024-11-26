@@ -141,7 +141,7 @@
             this.btnExibirCaminhos.Location = new System.Drawing.Point(266, 174);
             this.btnExibirCaminhos.Name = "btnExibirCaminhos";
             this.btnExibirCaminhos.Size = new System.Drawing.Size(75, 25);
-            this.btnExibirCaminhos.TabIndex = 26;
+            this.btnExibirCaminhos.TabIndex = 14;
             this.btnExibirCaminhos.Text = "Exibir";
             this.btnExibirCaminhos.UseVisualStyleBackColor = true;
             this.btnExibirCaminhos.Click += new System.EventHandler(this.btnExibirCaminhos_Click);
@@ -160,7 +160,7 @@
             this.btnExcluirCaminho.Location = new System.Drawing.Point(103, 174);
             this.btnExcluirCaminho.Name = "btnExcluirCaminho";
             this.btnExcluirCaminho.Size = new System.Drawing.Size(75, 25);
-            this.btnExcluirCaminho.TabIndex = 4;
+            this.btnExcluirCaminho.TabIndex = 12;
             this.btnExcluirCaminho.Text = "Excluir";
             this.btnExcluirCaminho.UseVisualStyleBackColor = true;
             this.btnExcluirCaminho.Click += new System.EventHandler(this.btnExcluirCaminho_Click);
@@ -179,7 +179,7 @@
             this.btnAlterarCaminho.Location = new System.Drawing.Point(184, 174);
             this.btnAlterarCaminho.Name = "btnAlterarCaminho";
             this.btnAlterarCaminho.Size = new System.Drawing.Size(75, 25);
-            this.btnAlterarCaminho.TabIndex = 3;
+            this.btnAlterarCaminho.TabIndex = 13;
             this.btnAlterarCaminho.Text = "Alterar";
             this.btnAlterarCaminho.UseVisualStyleBackColor = true;
             this.btnAlterarCaminho.Click += new System.EventHandler(this.btnAlterarCaminho_Click);
@@ -198,7 +198,7 @@
             this.btnIncluirCaminho.Location = new System.Drawing.Point(22, 174);
             this.btnIncluirCaminho.Name = "btnIncluirCaminho";
             this.btnIncluirCaminho.Size = new System.Drawing.Size(75, 25);
-            this.btnIncluirCaminho.TabIndex = 2;
+            this.btnIncluirCaminho.TabIndex = 11;
             this.btnIncluirCaminho.Text = "Incluir";
             this.btnIncluirCaminho.UseVisualStyleBackColor = true;
             this.btnIncluirCaminho.Click += new System.EventHandler(this.btnIncluirCaminho_Click);
@@ -213,7 +213,7 @@
             0});
             this.udDistancia.Name = "udDistancia";
             this.udDistancia.Size = new System.Drawing.Size(120, 23);
-            this.udDistancia.TabIndex = 23;
+            this.udDistancia.TabIndex = 8;
             // 
             // udCusto
             // 
@@ -225,7 +225,7 @@
             0});
             this.udCusto.Name = "udCusto";
             this.udCusto.Size = new System.Drawing.Size(120, 23);
-            this.udCusto.TabIndex = 25;
+            this.udCusto.TabIndex = 10;
             // 
             // udTempo
             // 
@@ -237,7 +237,7 @@
             0});
             this.udTempo.Name = "udTempo";
             this.udTempo.Size = new System.Drawing.Size(120, 23);
-            this.udTempo.TabIndex = 24;
+            this.udTempo.TabIndex = 9;
             // 
             // txtNomeCidadeDestino
             // 
@@ -245,7 +245,7 @@
             this.txtNomeCidadeDestino.MaxLength = 15;
             this.txtNomeCidadeDestino.Name = "txtNomeCidadeDestino";
             this.txtNomeCidadeDestino.Size = new System.Drawing.Size(234, 23);
-            this.txtNomeCidadeDestino.TabIndex = 24;
+            this.txtNomeCidadeDestino.TabIndex = 7;
             // 
             // label6
             // 
@@ -267,7 +267,7 @@
             this.dgvCaminhos.Name = "dgvCaminhos";
             this.dgvCaminhos.ReadOnly = true;
             this.dgvCaminhos.RowHeadersWidth = 51;
-            this.dgvCaminhos.Size = new System.Drawing.Size(406, 284);
+            this.dgvCaminhos.Size = new System.Drawing.Size(406, 281);
             this.dgvCaminhos.TabIndex = 1;
             // 
             // groupBox1
@@ -306,7 +306,7 @@
             this.btnIncluirCidade.Location = new System.Drawing.Point(19, 115);
             this.btnIncluirCidade.Name = "btnIncluirCidade";
             this.btnIncluirCidade.Size = new System.Drawing.Size(75, 25);
-            this.btnIncluirCidade.TabIndex = 10;
+            this.btnIncluirCidade.TabIndex = 3;
             this.btnIncluirCidade.Text = "Incluir";
             this.btnIncluirCidade.UseVisualStyleBackColor = true;
             this.btnIncluirCidade.Click += new System.EventHandler(this.btnIncluirCidade_Click);
@@ -317,14 +317,14 @@
             this.txtNomeCidade.MaxLength = 15;
             this.txtNomeCidade.Name = "txtNomeCidade";
             this.txtNomeCidade.Size = new System.Drawing.Size(234, 23);
-            this.txtNomeCidade.TabIndex = 14;
+            this.txtNomeCidade.TabIndex = 0;
             // 
             // btnExibirCidade
             // 
             this.btnExibirCidade.Location = new System.Drawing.Point(263, 115);
             this.btnExibirCidade.Name = "btnExibirCidade";
             this.btnExibirCidade.Size = new System.Drawing.Size(75, 25);
-            this.btnExibirCidade.TabIndex = 11;
+            this.btnExibirCidade.TabIndex = 6;
             this.btnExibirCidade.Text = "Exibir";
             this.btnExibirCidade.UseVisualStyleBackColor = true;
             this.btnExibirCidade.Click += new System.EventHandler(this.btnExibirCidade_Click);
@@ -343,7 +343,7 @@
             this.btnAlterarCidade.Location = new System.Drawing.Point(181, 115);
             this.btnAlterarCidade.Name = "btnAlterarCidade";
             this.btnAlterarCidade.Size = new System.Drawing.Size(75, 25);
-            this.btnAlterarCidade.TabIndex = 12;
+            this.btnAlterarCidade.TabIndex = 5;
             this.btnAlterarCidade.Text = "Alterar";
             this.btnAlterarCidade.UseVisualStyleBackColor = true;
             this.btnAlterarCidade.Click += new System.EventHandler(this.btnAlterarCidade_Click);
@@ -373,14 +373,14 @@
             0});
             this.udX.Name = "udX";
             this.udX.Size = new System.Drawing.Size(67, 23);
-            this.udX.TabIndex = 15;
+            this.udX.TabIndex = 1;
             // 
             // btnExcluirCidade
             // 
             this.btnExcluirCidade.Location = new System.Drawing.Point(100, 115);
             this.btnExcluirCidade.Name = "btnExcluirCidade";
             this.btnExcluirCidade.Size = new System.Drawing.Size(75, 25);
-            this.btnExcluirCidade.TabIndex = 13;
+            this.btnExcluirCidade.TabIndex = 4;
             this.btnExcluirCidade.Text = "Excluir";
             this.btnExcluirCidade.UseVisualStyleBackColor = true;
             this.btnExcluirCidade.Click += new System.EventHandler(this.btnExcluirCidade_Click);
@@ -401,7 +401,7 @@
             0});
             this.udY.Name = "udY";
             this.udY.Size = new System.Drawing.Size(65, 23);
-            this.udY.TabIndex = 16;
+            this.udY.TabIndex = 2;
             // 
             // label3
             // 
@@ -420,7 +420,7 @@
             this.pbMapa.Image = global::apCidadesEmMarte.Properties.Resources.Mapa_Marte_sem_rotas;
             this.pbMapa.Location = new System.Drawing.Point(30, 173);
             this.pbMapa.Name = "pbMapa";
-            this.pbMapa.Size = new System.Drawing.Size(520, 341);
+            this.pbMapa.Size = new System.Drawing.Size(520, 338);
             this.pbMapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMapa.TabIndex = 0;
             this.pbMapa.TabStop = false;

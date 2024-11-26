@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Ana Clara Martin da Silveira - 23122
+// Sofia Tasselli Kawamura - 23157
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -87,25 +90,9 @@ public class Arvore<Dado> where Dado : IComparable<Dado>, IRegistro, new()
 
     public NoArvore<Dado> Anterior { get => antecessor; set => antecessor = value; }
 
-
-    public int QuantosNos()
-    {
-        return QuantosNos(this.raiz);
-    }
-
-    private int QuantosNos(NoArvore<Dado> noAtual)
-    {
-        if (noAtual == null)
-        return 0;
-
-        return 1 +
-        QuantosNos(noAtual.Esq) +
-        QuantosNos(noAtual.Dir);
-    }
-
     public void DesenharArvore(int x, int y, Graphics g)
     {
-        DesenharArvore(true, this.raiz, x, y, Math.PI / 2, 1, 350, g);
+        DesenharArvore(true, this.raiz, x, y, Math.PI / 2, 1, 200, g);
     }
 
     private void DesenharArvore(bool primeiraVez, NoArvore<Dado> noAtual,
@@ -132,9 +119,9 @@ public class Arvore<Dado> where Dado : IComparable<Dado>, IRegistro, new()
                            incremento * 0.60, comprimento * 0.8, g);
 
             SolidBrush preenchimento = new SolidBrush(Color.DeepPink);
-            g.FillEllipse(preenchimento, xf-45, yf-25, 90, 50);
+            g.FillEllipse(preenchimento, xf-35, yf-15, 70, 30);
 
-            Font fonte = new Font("Comic-Sans", 10);
+            Font fonte = new Font("Comic-Sans", 8);
             SizeF tamanho = g.MeasureString(noAtual.Info.ToString(), fonte);
 
             float xTexto = xf - (tamanho.Width / 2);

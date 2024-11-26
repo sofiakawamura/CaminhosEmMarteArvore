@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Ana Clara Martin da Silveira - 23122
+// Sofia Tasselli Kawamura - 23157
+
+using System;
 using System.IO;
 
 public interface IRegistro

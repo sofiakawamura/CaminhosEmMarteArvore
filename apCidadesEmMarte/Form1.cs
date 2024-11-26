@@ -1,10 +1,14 @@
-﻿using System;
+﻿// Ana Clara Martin da Silveira - 23122
+// Sofia Tasselli Kawamura - 23157
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +26,9 @@ namespace apCidadesEmMarte
 
         string nomeArquivoCidades;
         string nomeArquivoCaminhos;
+
+        Cidade cidadeSelecionada;
+        Caminho caminhoSelecionado;
 
         private void FrmCidades_Load(object sender, EventArgs e)
         {
@@ -41,21 +48,22 @@ namespace apCidadesEmMarte
                 var origem = new FileStream(nomeArquivoCaminhos, FileMode.OpenOrCreate);
                 var arquivo = new BinaryReader(origem);
 
-                int posicaoAtual = 0;
-                int posicaoFinal = (int)origem.Length / new Caminho().TamanhoRegistro - 1;
+                int registroAtual = 0;
+                int qtosRegistros = (int)origem.Length / new Caminho().TamanhoRegistro - 1;
 
-                while (posicaoAtual < posicaoFinal)
+                while (registroAtual <= qtosRegistros)
                 {
                     Caminho novoCaminho = new Caminho();
-                    novoCaminho.LerRegistro(arquivo, posicaoAtual);
-                    posicaoAtual += novoCaminho.TamanhoRegistro;
+                    novoCaminho.LerRegistro(arquivo, registroAtual);
+                    registroAtual++;
 
                     Cidade cidadeOrigem = new Cidade(novoCaminho.CidadeOrigem, 0, 0);
                     if (arvore.Existe(cidadeOrigem))
-                    {
                         arvore.Atual.Info.Caminhos.InserirAposFim(novoCaminho);
-                    }
                 }
+
+                origem.Close();
+                arquivo.Close();
 
                 dgvCaminhos.Columns.Clear();
 
@@ -81,6 +89,18 @@ namespace apCidadesEmMarte
             udDistancia.Value = 0;
             udTempo.Value = 0;
             dgvCaminhos.Rows.Clear();
+            cidadeSelecionada = null;
+            caminhoSelecionado = null;
+        }
+
+        private void LimparCamposCaminhos()
+        {
+            txtNomeCidadeDestino.Text = "";
+            udCusto.Value = 0;
+            udDistancia.Value = 0;
+            udTempo.Value = 0;
+            dgvCaminhos.Rows.Clear();
+            caminhoSelecionado = null;
         }
 
         private void btnIncluirCidade_Click(object sender, EventArgs e)
@@ -91,7 +111,10 @@ namespace apCidadesEmMarte
             else
             {
                 arvore.IncluirNovoRegistro(novaCidade);
+                LimparCamposCaminhos();
+                cidadeSelecionada = novaCidade;
                 pbArvore.Invalidate();
+                pbMapa.Invalidate();
             }
         }
 
@@ -103,6 +126,7 @@ namespace apCidadesEmMarte
             
             LimparCampos();
             pbArvore.Invalidate();
+            pbMapa.Invalidate();
         }
 
         private void btnAlterarCidade_Click(object sender, EventArgs e)
@@ -114,6 +138,10 @@ namespace apCidadesEmMarte
 
                 cidade.X = (double)udX.Value;
                 cidade.Y = (double)udY.Value;
+
+                cidadeSelecionada = cidade;
+                ExibirCaminhos();
+                pbMapa.Invalidate();
             }
             else
             {
@@ -129,12 +157,15 @@ namespace apCidadesEmMarte
             {
                 Cidade cidade = arvore.Atual.Info;
 
+                LimparCampos();
+                
                 udX.Value = (decimal)cidade.X;
                 udY.Value = (decimal)cidade.Y;
+                
+                cidadeSelecionada = cidade;
 
-                ExibirCaminhos(cidade, "");
-
-                // exibir no mapa a cidade destacada
+                ExibirCaminhos();
+                pbMapa.Invalidate();
             }
             else
             {
@@ -143,12 +174,12 @@ namespace apCidadesEmMarte
             }
         }
 
-        private void ExibirCaminhos(Cidade cidade, String cidadeDestinoDestacada)
+        private void ExibirCaminhos()
         {
             dgvCaminhos.Rows.Clear();
 
             int indice = 0;
-            var atual = cidade.Caminhos.Primeiro;
+            var atual = cidadeSelecionada.Caminhos.Primeiro;
 
             while (atual != null)
             {
@@ -158,9 +189,9 @@ namespace apCidadesEmMarte
                    caminho.Distancia,
                    caminho.Tempo,
                    caminho.Custo
-               );
+                );
 
-                if (caminho.CidadeDestino == cidadeDestinoDestacada)
+                if (caminhoSelecionado != null && caminho.CidadeDestino == caminhoSelecionado.CidadeDestino)
                     dgvCaminhos.Rows[indice].DefaultCellStyle.BackColor = Color.Yellow;
 
                 atual = atual.Prox;
@@ -170,15 +201,15 @@ namespace apCidadesEmMarte
 
         private void pbMapa_Paint(object sender, PaintEventArgs e)
         {
-            // percorrer árvore e, para cada nó, exibir a cidade no mapa
             ExibirCidadesMapa(arvore.Raiz, e.Graphics);
         }
 
-        public void ExibirCidadesMapa(Arvore<Cidade>.NoArvore<Cidade> atual, Graphics ondeDesenhar)
+        private void ExibirCidadesMapa(Arvore<Cidade>.NoArvore<Cidade> atual, Graphics ondeDesenhar)
         {
             if (atual != null)
             { 
                 ExibirCidadesMapa(atual.Esq, ondeDesenhar);
+                ExibirCidadesMapa(atual.Dir, ondeDesenhar);
 
                 SolidBrush brush = new SolidBrush(Color.Black);
                 Pen pen = new Pen(brush, 2);
@@ -190,11 +221,43 @@ namespace apCidadesEmMarte
                 ondeDesenhar.DrawString(atual.Info.Nome, fonte, brush, x, y);
                 ondeDesenhar.DrawEllipse(pen, x, y, 3, 3);
 
-                // percorrer lista de caminhos e exibir cada um
+                if (cidadeSelecionada != null)
+                {
+                    x = (int)Math.Round(cidadeSelecionada.X * pbMapa.Width);
+                    y = (int)Math.Round(cidadeSelecionada.Y * pbMapa.Height);
 
-                ExibirCidadesMapa(atual.Dir, ondeDesenhar);
+                    var caminho = cidadeSelecionada.Caminhos.Primeiro;
+                    while (caminho != null)
+                    {
+                        arvore.Existe(new Cidade(caminho.Info.CidadeDestino, 0, 0));
+                        Cidade cidadeDestino = arvore.Atual.Info;
+
+                        int x2 = (int)Math.Round(cidadeDestino.X * pbMapa.Width);
+                        int y2 = (int)Math.Round(cidadeDestino.Y * pbMapa.Height);
+
+                        ondeDesenhar.DrawLine(pen, x, y, x2, y2);
+
+                        caminho = caminho.Prox;
+                    }
+
+                    brush = new SolidBrush(Color.Red);
+                    pen = new Pen(brush, 2);
+
+                    ondeDesenhar.DrawString(cidadeSelecionada.Nome, fonte, brush, x, y);
+                    ondeDesenhar.DrawEllipse(pen, x, y, 3, 3);
+
+                    if (caminhoSelecionado != null)
+                    {
+                        arvore.Existe(new Cidade(caminhoSelecionado.CidadeDestino, 0, 0));
+                        Cidade cidadeDestino = arvore.Atual.Info;
+
+                        int x2 = (int)Math.Round(cidadeDestino.X * pbMapa.Width);
+                        int y2 = (int)Math.Round(cidadeDestino.Y * pbMapa.Height);
+
+                        ondeDesenhar.DrawLine(pen, x, y, x2, y2);
+                    }
+                }
             }
-
         }
 
         private void btnIncluirCaminho_Click(object sender, EventArgs e)
@@ -217,7 +280,10 @@ namespace apCidadesEmMarte
                     else
                     { 
                         cidade.Caminhos.InserirAposFim(novoCaminho);
-                        ExibirCaminhos(cidade, "");
+                        cidadeSelecionada = cidade;
+                        caminhoSelecionado = novoCaminho;
+                        ExibirCaminhos();
+                        pbMapa.Invalidate();
                     }
                 }
             }
@@ -227,21 +293,21 @@ namespace apCidadesEmMarte
         {
             String cidadeOrigem = txtNomeCidade.Text;
             String cidadeDestino = txtNomeCidadeDestino.Text;
+               
+            Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
 
-            if (cidadeOrigem == "" || !arvore.Existe(new Cidade(cidadeOrigem, 0, 0)))
-                MessageBox.Show("Cidade de origem não encontrada!");
+            arvore.Existe(new Cidade(cidadeOrigem, 0, 0));
+            Cidade cidade = arvore.Atual.Info;
+
+            if (!cidade.Caminhos.Existe(novoCaminho))
+                MessageBox.Show("Caminho não encontrado!");
             else
             {
-                Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
-                Cidade cidade = arvore.Atual.Info;
-                if (!cidade.Caminhos.Existe(novoCaminho))
-                    MessageBox.Show("Caminho não encontrado!");
-                else
-                {
-                    cidade.Caminhos.Excluir(novoCaminho);
-                    ExibirCaminhos(cidade, "");
-                }
+                cidade.Caminhos.Excluir(novoCaminho);
+                LimparCamposCaminhos();
+                ExibirCaminhos();
             }
+            
         }
 
         private void btnAlterarCaminho_Click(object sender, EventArgs e)
@@ -250,9 +316,15 @@ namespace apCidadesEmMarte
             String cidadeDestino = txtNomeCidadeDestino.Text;
 
             Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
+
+            arvore.Existe(new Cidade(cidadeOrigem, 0, 0));
             Cidade cidade = arvore.Atual.Info;
+
             if (!cidade.Caminhos.Existe(novoCaminho))
+            {
                 MessageBox.Show("Caminho não encontrado!");
+                LimparCamposCaminhos();
+            }
             else
             {
                 var atual = cidade.Caminhos.Primeiro;
@@ -264,12 +336,14 @@ namespace apCidadesEmMarte
                         caminho.Tempo = (int)udTempo.Value;
                         caminho.Distancia = (int)udDistancia.Value;
                         caminho.Custo = (int)udCusto.Value;
+                        caminhoSelecionado = caminho;
                         break;
                     }
 
                     atual = atual.Prox;
                 }
-                ExibirCaminhos(cidade, "");
+                ExibirCaminhos();
+                pbMapa.Invalidate();
             }
             
         }
@@ -280,9 +354,13 @@ namespace apCidadesEmMarte
             String cidadeDestino = txtNomeCidadeDestino.Text;
 
             Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
+            arvore.Existe(new Cidade(cidadeOrigem, 0, 0));
+
             Cidade cidade = arvore.Atual.Info;
             if (!cidade.Caminhos.Existe(novoCaminho))
+            {
                 MessageBox.Show("Caminho não encontrado!");
+            }
             else
             {
                 var atual = cidade.Caminhos.Primeiro;
@@ -295,9 +373,10 @@ namespace apCidadesEmMarte
                         udCusto.Value = caminho.Custo;
                         udDistancia.Value = caminho.Distancia;
 
-                        ExibirCaminhos(cidade, caminho.CidadeDestino);
+                        caminhoSelecionado = caminho;
 
-                        // exibir no mapa o caminho destacado
+                        ExibirCaminhos();
+                        pbMapa.Invalidate();
 
                         break;
                     }
@@ -309,8 +388,32 @@ namespace apCidadesEmMarte
 
         private void FrmCidades_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // salvar arquivo de cidades
             arvore.GravarArquivoDeRegistros(nomeArquivoCidades);
 
+            // salvar arquivo de caminhos
+            var destino = new FileStream(nomeArquivoCaminhos, FileMode.Create);
+            var arquivo = new BinaryWriter(destino);
+            SalvarArquivoCaminhos(arvore.Raiz, arquivo);
+            destino.Close();
+            arquivo.Close();
+        }
+
+        private void SalvarArquivoCaminhos(Arvore<Cidade>.NoArvore<Cidade> atual, BinaryWriter arquivo)
+        {
+            if (atual != null)
+            {
+                SalvarArquivoCaminhos(atual.Esq, arquivo);
+                SalvarArquivoCaminhos(atual.Dir, arquivo);
+
+                ListaSimples<Caminho> caminhos = atual.Info.Caminhos;
+                var caminho = caminhos.Primeiro;
+                while (caminho != null)
+                {
+                    caminho.Info.GravarRegistro(arquivo);
+                    caminho = caminho.Prox;
+                }
+            }
         }
     }
 }
