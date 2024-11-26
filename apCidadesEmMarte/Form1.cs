@@ -37,7 +37,31 @@ namespace apCidadesEmMarte
             {
                 nomeArquivoCaminhos = dlgCamimnhos.FileName;
 
-                // ler arquivo de caminhos e colocar em cada cidade
+                var origem = new FileStream(nomeArquivoCaminhos, FileMode.OpenOrCreate);
+                var arquivo = new BinaryReader(origem);
+
+                int posicaoAtual = 0;
+                int posicaoFinal = (int)origem.Length / new Caminho().TamanhoRegistro - 1;
+
+                while (posicaoAtual < posicaoFinal)
+                {
+                    Caminho novoCaminho = new Caminho();
+                    novoCaminho.LerRegistro(arquivo, posicaoAtual);
+                    posicaoAtual += novoCaminho.TamanhoRegistro;
+
+                    Cidade cidadeOrigem = new Cidade(novoCaminho.CidadeOrigem, 0, 0);
+                    if (arvore.Existe(cidadeOrigem))
+                    {
+                        arvore.Atual.Info.Caminhos.InserirAposFim(novoCaminho);
+                    }
+                }
+
+                dgvCaminhos.Columns.Clear();
+
+                dgvCaminhos.Columns.Add("CidadeDestino", "Cidade Destino");
+                dgvCaminhos.Columns.Add("Distancia", "Distância");
+                dgvCaminhos.Columns.Add("Tempo", "Tempo");
+                dgvCaminhos.Columns.Add("Custo", "Custo");
             }
         }
 
@@ -51,23 +75,32 @@ namespace apCidadesEmMarte
         {
             udX.Value = 0;
             udY.Value = 0;
+            txtNomeCidadeDestino.Text = "";
+            udCusto.Value = 0;
+            udDistancia.Value = 0;
+            udTempo.Value = 0;
+            dgvCaminhos.Rows.Clear();
         }
 
         private void btnIncluirCidade_Click(object sender, EventArgs e)
         {
             Cidade novaCidade = new Cidade(txtNomeCidade.Text, (double)udX.Value, (double)udY.Value);
-            arvore.IncluirNovoRegistro(novaCidade);
-            pbArvore.Invalidate();
+            if (arvore.Existe(novaCidade))
+                MessageBox.Show("Cidade já existente!");
+            else
+            {
+                arvore.IncluirNovoRegistro(novaCidade);
+                pbArvore.Invalidate();
+            }
         }
 
         private void btnExcluirCidade_Click(object sender, EventArgs e)
         {
             String nome = txtNomeCidade.Text;
             if (!arvore.ExcluirRecursivo(new Cidade(nome, 0, 0)))
-            {
                 MessageBox.Show("Cidade não encontrada!");
-                LimparCampos();
-            }
+            
+            LimparCampos();
             pbArvore.Invalidate();
         }
 
@@ -99,6 +132,7 @@ namespace apCidadesEmMarte
                 udY.Value = (decimal)cidade.Y;
 
                 // exibir caminhos
+                ExibirCaminhos(cidade, "");
 
                 // exibir no mapa
             }
@@ -109,9 +143,151 @@ namespace apCidadesEmMarte
             }
         }
 
+        private void ExibirCaminhos(Cidade cidade, String cidadeDestinoDestacada)
+        {
+            dgvCaminhos.Rows.Clear();
+
+            int indice = 0;
+            var atual = cidade.Caminhos.Primeiro;
+
+            while (atual != null)
+            {
+                var caminho = atual.Info;
+                dgvCaminhos.Rows.Add(
+                   caminho.CidadeDestino,
+                   caminho.Distancia,
+                   caminho.Tempo,
+                   caminho.Custo
+               );
+
+                if (caminho.CidadeDestino == cidadeDestinoDestacada)
+                    dgvCaminhos.Rows[indice].DefaultCellStyle.BackColor = Color.Yellow;
+
+                atual = atual.Prox;
+                indice++;
+            }
+        }
+
         private void pbMapa_Paint(object sender, PaintEventArgs e)
         {
-            // percorrer árvore e, para cada nó, exibir a cidade
+            // percorrer árvore e, para cada nó, exibir a cidade no mapa
+
+        }
+
+        private void btnIncluirCaminho_Click(object sender, EventArgs e)
+        {
+            String cidadeOrigem = txtNomeCidade.Text;
+            String cidadeDestino = txtNomeCidadeDestino.Text;
+
+            if (cidadeDestino == "" || !arvore.Existe(new Cidade(cidadeDestino, 0, 0)))
+                MessageBox.Show("Cidade de destino não encontrada!");
+            else
+            {
+                if (cidadeOrigem == "" || !arvore.Existe(new Cidade(cidadeOrigem, 0, 0)))
+                    MessageBox.Show("Cidade de origem não encontrada!");
+                else
+                {
+                    Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
+                    Cidade cidade = arvore.Atual.Info;
+                    if (cidade.Caminhos.Existe(novoCaminho))
+                        MessageBox.Show("Caminho já existente!");
+                    else
+                    { 
+                        cidade.Caminhos.InserirAposFim(novoCaminho);
+                        ExibirCaminhos(cidade, "");
+                    }
+                }
+            }
+        }
+
+        private void btnExcluirCaminho_Click(object sender, EventArgs e)
+        {
+            String cidadeOrigem = txtNomeCidade.Text;
+            String cidadeDestino = txtNomeCidadeDestino.Text;
+
+            if (cidadeOrigem == "" || !arvore.Existe(new Cidade(cidadeOrigem, 0, 0)))
+                MessageBox.Show("Cidade de origem não encontrada!");
+            else
+            {
+                Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
+                Cidade cidade = arvore.Atual.Info;
+                if (!cidade.Caminhos.Existe(novoCaminho))
+                    MessageBox.Show("Caminho não encontrado!");
+                else
+                {
+                    cidade.Caminhos.Excluir(novoCaminho);
+                    ExibirCaminhos(cidade, "");
+                }
+            }
+        }
+
+        private void btnAlterarCaminho_Click(object sender, EventArgs e)
+        {
+            String cidadeOrigem = txtNomeCidade.Text;
+            String cidadeDestino = txtNomeCidadeDestino.Text;
+
+            Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
+            Cidade cidade = arvore.Atual.Info;
+            if (!cidade.Caminhos.Existe(novoCaminho))
+                MessageBox.Show("Caminho não encontrado!");
+            else
+            {
+                var atual = cidade.Caminhos.Primeiro;
+                while (atual != null)
+                {
+                    var caminho = atual.Info;
+                    if (caminho.CompareTo(novoCaminho) == 0)
+                    {
+                        caminho.Tempo = (int)udTempo.Value;
+                        caminho.Distancia = (int)udDistancia.Value;
+                        caminho.Custo = (int)udCusto.Value;
+                        break;
+                    }
+
+                    atual = atual.Prox;
+                }
+                ExibirCaminhos(cidade, "");
+            }
+            
+        }
+
+        private void btnExibirCaminhos_Click(object sender, EventArgs e)
+        {
+            String cidadeOrigem = txtNomeCidade.Text;
+            String cidadeDestino = txtNomeCidadeDestino.Text;
+
+            Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
+            Cidade cidade = arvore.Atual.Info;
+            if (!cidade.Caminhos.Existe(novoCaminho))
+                MessageBox.Show("Caminho não encontrado!");
+            else
+            {
+                var atual = cidade.Caminhos.Primeiro;
+                while (atual != null)
+                {
+                    var caminho = atual.Info;
+                    if (caminho.CompareTo(novoCaminho) == 0)
+                    {
+                        udTempo.Value = caminho.Tempo;
+                        udCusto.Value = caminho.Custo;
+                        udDistancia.Value = caminho.Distancia;
+
+                        ExibirCaminhos(cidade, caminho.CidadeDestino);
+
+                        // exibir no mapa
+
+                        break;
+                    }
+
+                    atual = atual.Prox;
+                };
+            }
+        }
+
+        private void FrmCidades_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            arvore.GravarArquivoDeRegistros(nomeArquivoCidades);
+
         }
     }
 }

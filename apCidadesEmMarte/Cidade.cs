@@ -11,11 +11,11 @@ public class Cidade : IComparable<Cidade>, IRegistro
     public const int tamanhoNome = 15;
     string nome;
     double x, y;
-    ListaSimples<Caminho> caminhos;
+    ListaSimples<Caminho> caminhos = new ListaSimples<Caminho>();
 
     public string Nome
     {
-        get => this.nome;
+        get => this.nome.Trim();
         set
         {
             this.nome = value.PadRight(tamanhoNome, ' ').Substring(0, tamanhoNome);
@@ -57,7 +57,6 @@ public class Cidade : IComparable<Cidade>, IRegistro
         this.Nome = nome;
         this.x = x;
         this.y = y;
-        this.caminhos = new ListaSimples<Caminho>();
     }
 
     public void LerRegistro(BinaryReader arquivo, long qualRegistro)
