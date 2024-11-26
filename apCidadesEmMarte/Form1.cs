@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -131,10 +132,9 @@ namespace apCidadesEmMarte
                 udX.Value = (decimal)cidade.X;
                 udY.Value = (decimal)cidade.Y;
 
-                // exibir caminhos
                 ExibirCaminhos(cidade, "");
 
-                // exibir no mapa
+                // exibir no mapa a cidade destacada
             }
             else
             {
@@ -171,6 +171,29 @@ namespace apCidadesEmMarte
         private void pbMapa_Paint(object sender, PaintEventArgs e)
         {
             // percorrer árvore e, para cada nó, exibir a cidade no mapa
+            ExibirCidadesMapa(arvore.Raiz, e.Graphics);
+        }
+
+        public void ExibirCidadesMapa(Arvore<Cidade>.NoArvore<Cidade> atual, Graphics ondeDesenhar)
+        {
+            if (atual != null)
+            { 
+                ExibirCidadesMapa(atual.Esq, ondeDesenhar);
+
+                SolidBrush brush = new SolidBrush(Color.Black);
+                Pen pen = new Pen(brush, 2);
+                var fonte = new Font("Microsoft Sans Serif", 10);
+
+                int x = (int)Math.Round(atual.Info.X * pbMapa.Width);
+                int y = (int)Math.Round(atual.Info.Y * pbMapa.Height);
+
+                ondeDesenhar.DrawString(atual.Info.Nome, fonte, brush, x, y);
+                ondeDesenhar.DrawEllipse(pen, x, y, 3, 3);
+
+                // percorrer lista de caminhos e exibir cada um
+
+                ExibirCidadesMapa(atual.Dir, ondeDesenhar);
+            }
 
         }
 
@@ -274,7 +297,7 @@ namespace apCidadesEmMarte
 
                         ExibirCaminhos(cidade, caminho.CidadeDestino);
 
-                        // exibir no mapa
+                        // exibir no mapa o caminho destacado
 
                         break;
                     }
