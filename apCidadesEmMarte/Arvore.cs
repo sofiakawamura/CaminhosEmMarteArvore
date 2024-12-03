@@ -176,6 +176,26 @@ public class Arvore<Dado> where Dado : IComparable<Dado>, IRegistro, new()
         }
     }
 
+    public void GravarArquivoJson(string nomeArquivo)
+    {
+        var destino = new FileStream(nomeArquivo, FileMode.Create);
+        var arquivo = new StreamWriter(destino);
+        arquivo.Write("[\n");
+        GravarInOrdem(raiz);
+        arquivo.Write("]");
+        arquivo.Close();
+
+        void GravarInOrdem(NoArvore<Dado> r)
+        {
+            if (r != null)
+            {
+                GravarInOrdem(r.Esq);
+                r.Info.GravarJSON(arquivo);
+                GravarInOrdem(r.Dir);
+            }
+        }
+    }
+
     public bool Existe(Dado procurado)
     {
         antecessor = null;

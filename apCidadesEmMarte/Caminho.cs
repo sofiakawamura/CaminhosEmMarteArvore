@@ -149,4 +149,21 @@ public class Caminho : IComparable<Caminho>, IRegistro
             return 0;
         return -1;
     }
+
+    public void GravarJSON(StreamWriter arquivo)
+    {
+        if (arquivo != null)
+        {
+            string json = 
+                "{\n" +
+                "\t\"CidadeOrigem\": \"" + CidadeOrigem + "\",\n" +
+                "\t\"CidadeDestino\": \"" + CidadeDestino + "\",\n" +
+                "\t\"Distancia\": " + Distancia.ToString() + ",\n" +
+                "\t\"Tempo\": " + Tempo.ToString() + ",\n" +
+                "\t\"Custo\": " + Custo.ToString() + "\n" +
+                "},\n";
+
+            arquivo.Write(json);
+        }
+    }
 }

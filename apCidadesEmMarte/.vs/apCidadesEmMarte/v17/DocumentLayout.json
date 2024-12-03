@@ -1,25 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\",
+  "WorkspaceRootPath": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|c:\\users\\u23157\\documents\\tecnico\\ed\\caminhosemmartearvore\\apcidadesemmarte\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\cidade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\cidade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|solutionrelative:cidade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\arvore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|c:\\users\\u23157\\documents\\caminhosemmartearvore\\apcidadesemmarte\\caminho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|solutionrelative:caminho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\arvore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|solutionrelative:arvore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\iregistro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|c:\\users\\u23157\\documents\\caminhosemmartearvore\\apcidadesemmarte\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|c:\\users\\u23157\\documents\\caminhosemmartearvore\\apcidadesemmarte\\iregistro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FBA1F19-2265-483D-8DB1-F1089B358A3E}|apCidadesEmMarte.csproj|solutionrelative:iregistro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,60 +70,76 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Arvore.cs",
-              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Arvore.cs",
-              "RelativeDocumentMoniker": "Arvore.cs",
-              "ToolTip": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Arvore.cs",
-              "RelativeToolTip": "Arvore.cs",
-              "ViewState": "AQIAALQAAAAAAAAAAAAYwMYAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T01:19:52.399Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Cidade.cs",
-              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Cidade.cs",
-              "RelativeDocumentMoniker": "Cidade.cs",
-              "ToolTip": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Cidade.cs",
-              "RelativeToolTip": "Cidade.cs",
-              "ViewState": "AQIAAFgAAAAAAAAAAADwvykAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T01:19:52.925Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "IRegistro.cs",
-              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\IRegistro.cs",
+              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\IRegistro.cs",
               "RelativeDocumentMoniker": "IRegistro.cs",
-              "ToolTip": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\IRegistro.cs",
+              "ToolTip": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\IRegistro.cs",
               "RelativeToolTip": "IRegistro.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T01:19:52.933Z"
+              "WhenOpened": "2024-12-03T13:13:11.217Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Caminho.cs",
+              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Caminho.cs",
+              "RelativeDocumentMoniker": "Caminho.cs",
+              "ToolTip": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Caminho.cs",
+              "RelativeToolTip": "Caminho.cs",
+              "ViewState": "AQIAAIoAAAAAAAAAAADwv6MAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T13:09:17.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Arvore.cs",
+              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Arvore.cs",
+              "RelativeDocumentMoniker": "Arvore.cs",
+              "ToolTip": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Arvore.cs",
+              "RelativeToolTip": "Arvore.cs",
+              "ViewState": "AQIAAKAAAAAAAAAAAAAUwLcAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T01:19:52.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Cidade.cs",
+              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Cidade.cs",
+              "RelativeDocumentMoniker": "Cidade.cs",
+              "ToolTip": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Cidade.cs",
+              "RelativeToolTip": "Cidade.cs",
+              "ViewState": "AQIAAGwAAAAAAAAAAAAkwHkAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T01:19:52.925Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Form1.cs",
+              "ToolTip": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AQIAAFMAAAAAAAAAAAAowHEAAABAAAAA",
+              "ViewState": "AQIAAJMBAAAAAAAAAAAIwJ4BAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-26T01:19:52.934Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\u23157\\Documents\\Tecnico\\ED\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\u23157\\Documents\\CaminhosEmMarteArvore\\apCidadesEmMarte\\Form1.cs [Design]",
               "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-26T01:19:52.935Z",

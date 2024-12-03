@@ -273,17 +273,23 @@ namespace apCidadesEmMarte
                     MessageBox.Show("Cidade de origem não encontrada!");
                 else
                 {
-                    Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
-                    Cidade cidade = arvore.Atual.Info;
-                    if (cidade.Caminhos.Existe(novoCaminho))
-                        MessageBox.Show("Caminho já existente!");
+                    if (cidadeOrigem == cidadeDestino)
+                        MessageBox.Show("Você já está na cidade de destino!");
+
                     else
-                    { 
-                        cidade.Caminhos.InserirAposFim(novoCaminho);
-                        cidadeSelecionada = cidade;
-                        caminhoSelecionado = novoCaminho;
-                        ExibirCaminhos();
-                        pbMapa.Invalidate();
+                    {
+                        Caminho novoCaminho = new Caminho(cidadeOrigem, cidadeDestino, (int)udDistancia.Value, (int)udTempo.Value, (int)udCusto.Value);
+                        Cidade cidade = arvore.Atual.Info;
+                        if (cidade.Caminhos.Existe(novoCaminho))
+                            MessageBox.Show("Caminho já existente!");
+                        else
+                        {
+                            cidade.Caminhos.InserirAposFim(novoCaminho);
+                            cidadeSelecionada = cidade;
+                            caminhoSelecionado = novoCaminho;
+                            ExibirCaminhos();
+                            pbMapa.Invalidate();
+                        }
                     }
                 }
             }
@@ -388,30 +394,70 @@ namespace apCidadesEmMarte
 
         private void FrmCidades_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // salvar arquivo de cidades
-            arvore.GravarArquivoDeRegistros(nomeArquivoCidades);
+            if (nomeArquivoCidades != null && nomeArquivoCaminhos != null)
+            {
+                // salvar arquivo de cidades
+                arvore.GravarArquivoDeRegistros(nomeArquivoCidades);
+                arvore.GravarArquivoJson("C:\\Temp\\cidades.json");
 
-            // salvar arquivo de caminhos
-            var destino = new FileStream(nomeArquivoCaminhos, FileMode.Create);
-            var arquivo = new BinaryWriter(destino);
-            SalvarArquivoCaminhos(arvore.Raiz, arquivo);
-            destino.Close();
-            arquivo.Close();
+                // salvar arquivo de caminhos
+                SalvarArquivoCaminhos(nomeArquivoCaminhos);
+                SalvarArquivoCaminhosJson("C:\\Temp\\caminhos.json");
+            }
         }
 
-        private void SalvarArquivoCaminhos(Arvore<Cidade>.NoArvore<Cidade> atual, BinaryWriter arquivo)
+        private void SalvarArquivoCaminhosJson(string nomeArquivo)
         {
-            if (atual != null)
-            {
-                SalvarArquivoCaminhos(atual.Esq, arquivo);
-                SalvarArquivoCaminhos(atual.Dir, arquivo);
+            var destino = new FileStream(nomeArquivo, FileMode.Create);
+            var arquivo = new StreamWriter(destino);
 
-                ListaSimples<Caminho> caminhos = atual.Info.Caminhos;
-                var caminho = caminhos.Primeiro;
-                while (caminho != null)
+            arquivo.Write("[\n");
+            GravarInOrdem(arvore.Raiz);
+            arquivo.Write("]");
+            arquivo.Close();
+
+            void GravarInOrdem(Arvore<Cidade>.NoArvore<Cidade> atual)
+            {
+                if (atual != null)
                 {
-                    caminho.Info.GravarRegistro(arquivo);
-                    caminho = caminho.Prox;
+                    GravarInOrdem(atual.Esq);
+
+                    ListaSimples<Caminho> caminhos = atual.Info.Caminhos;
+                    var caminho = caminhos.Primeiro;
+                    while (caminho != null)
+                    {
+                        caminho.Info.GravarJSON(arquivo);
+                        caminho = caminho.Prox;
+                    }
+
+                    GravarInOrdem(atual.Dir);
+                }
+            }
+        }
+
+        private void SalvarArquivoCaminhos(string nomeArquivo)
+        {
+            var destino = new FileStream(nomeArquivo, FileMode.Create);
+            var arquivo = new BinaryWriter(destino);
+
+            GravarInOrdem(arvore.Raiz);
+            arquivo.Close();
+
+            void GravarInOrdem(Arvore<Cidade>.NoArvore<Cidade> atual)
+            {
+                if (atual != null)
+                {
+                    GravarInOrdem(atual.Esq);
+
+                    ListaSimples<Caminho> caminhos = atual.Info.Caminhos;
+                    var caminho = caminhos.Primeiro;
+                    while (caminho != null)
+                    {
+                        caminho.Info.GravarRegistro(arquivo);
+                        caminho = caminho.Prox;
+                    }
+
+                    GravarInOrdem(atual.Dir);
                 }
             }
         }

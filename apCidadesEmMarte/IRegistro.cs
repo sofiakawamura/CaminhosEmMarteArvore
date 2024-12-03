@@ -10,5 +10,7 @@ public interface IRegistro
 
     void GravarRegistro(BinaryWriter arquivo);
 
+    void GravarJSON(StreamWriter arquivo);
+
     int TamanhoRegistro { get; }
 }

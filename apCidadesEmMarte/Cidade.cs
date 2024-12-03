@@ -113,4 +113,19 @@ public class Cidade : IComparable<Cidade>, IRegistro
     {
         return nome.Trim();
     }
+
+    public void GravarJSON(StreamWriter arquivo)
+    {
+        if (arquivo != null)
+        {
+            string json = 
+                "{\n" +
+                "\t\"Nome\": \"" + Nome + "\",\n" +
+                "\t\"X\": " + X.ToString().Replace(',', '.') + ",\n" +
+                "\t\"Y\": " + Y.ToString().Replace(',', '.') + "\n" +
+                "},\n";
+
+            arquivo.Write(json);
+        }
+    }
 }
