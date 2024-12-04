@@ -412,25 +412,40 @@ namespace apCidadesEmMarte
             var arquivo = new StreamWriter(destino);
 
             arquivo.Write("[\n");
-            GravarInOrdem(arvore.Raiz);
-            arquivo.Write("]");
+
+            bool primeiro = true;
+            GravarInOrdem(arvore.Raiz, ref primeiro);
+
+            arquivo.Write("\n]");
             arquivo.Close();
 
-            void GravarInOrdem(Arvore<Cidade>.NoArvore<Cidade> atual)
+            void GravarInOrdem(Arvore<Cidade>.NoArvore<Cidade> atual, ref bool pri)
             {
                 if (atual != null)
                 {
-                    GravarInOrdem(atual.Esq);
+                    GravarInOrdem(atual.Esq, ref pri);
 
                     ListaSimples<Caminho> caminhos = atual.Info.Caminhos;
                     var caminho = caminhos.Primeiro;
+
+                    //if (!pri)
+                       //arquivo.Write(",\n");
+
                     while (caminho != null)
                     {
+                        //if (caminho != caminhos.Primeiro)
+                        if (!pri)
+                        {
+                            arquivo.Write(",\n");
+                            pri = false;
+                        }
+
                         caminho.Info.GravarJSON(arquivo);
                         caminho = caminho.Prox;
                     }
 
-                    GravarInOrdem(atual.Dir);
+                    pri = false;
+                    GravarInOrdem(atual.Dir, ref pri);
                 }
             }
         }
@@ -438,6 +453,7 @@ namespace apCidadesEmMarte
         private void SalvarArquivoCaminhos(string nomeArquivo)
         {
             var destino = new FileStream(nomeArquivo, FileMode.Create);
+
             var arquivo = new BinaryWriter(destino);
 
             GravarInOrdem(arvore.Raiz);

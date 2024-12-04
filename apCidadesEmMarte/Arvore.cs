@@ -92,7 +92,7 @@ public class Arvore<Dado> where Dado : IComparable<Dado>, IRegistro, new()
 
     public void DesenharArvore(int x, int y, Graphics g)
     {
-        DesenharArvore(true, this.raiz, x, y, Math.PI / 2, 1, 200, g);
+        DesenharArvore(true, this.raiz, x, y, Math.PI / 2, 1, 400, g);
     }
 
     private void DesenharArvore(bool primeiraVez, NoArvore<Dado> noAtual,
@@ -119,15 +119,17 @@ public class Arvore<Dado> where Dado : IComparable<Dado>, IRegistro, new()
                            incremento * 0.60, comprimento * 0.8, g);
 
             SolidBrush preenchimento = new SolidBrush(Color.DeepPink);
-            g.FillEllipse(preenchimento, xf-35, yf-15, 70, 30);
+            g.FillEllipse(preenchimento, xf-40, yf-20, 80, 40);
+            
+            string escrita = noAtual.Info.ToString();
 
             Font fonte = new Font("Comic-Sans", 8);
-            SizeF tamanho = g.MeasureString(noAtual.Info.ToString(), fonte);
+            SizeF tamanho = g.MeasureString(escrita, fonte);
 
             float xTexto = xf - (tamanho.Width / 2);
             float yTexto = yf - (tamanho.Height / 2);
 
-            g.DrawString(noAtual.Info.ToString(), fonte, new SolidBrush(Color.White), xTexto, yTexto);
+            g.DrawString(escrita, fonte, new SolidBrush(Color.White), xTexto, yTexto);
         }
     }
 
@@ -181,17 +183,28 @@ public class Arvore<Dado> where Dado : IComparable<Dado>, IRegistro, new()
         var destino = new FileStream(nomeArquivo, FileMode.Create);
         var arquivo = new StreamWriter(destino);
         arquivo.Write("[\n");
-        GravarInOrdem(raiz);
-        arquivo.Write("]");
+
+        bool primeiro = true;
+        GravarInOrdem(raiz, ref primeiro);
+        //arquivo.Remove()
+
+        arquivo.Write("\n]");
         arquivo.Close();
 
-        void GravarInOrdem(NoArvore<Dado> r)
+        void GravarInOrdem(NoArvore<Dado> r, ref bool pri)
         {
             if (r != null)
             {
-                GravarInOrdem(r.Esq);
+                GravarInOrdem(r.Esq, ref pri);
+
+                // se não for o primeiro registro, precisamos que uma vírgula seja acrescentada
+                if (!pri)
+                    arquivo.Write(",\n");
+
                 r.Info.GravarJSON(arquivo);
-                GravarInOrdem(r.Dir);
+                pri = false;
+
+                GravarInOrdem(r.Dir, ref pri);
             }
         }
     }

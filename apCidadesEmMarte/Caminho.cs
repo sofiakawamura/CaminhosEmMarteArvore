@@ -161,7 +161,7 @@ public class Caminho : IComparable<Caminho>, IRegistro
                 "\t\"Distancia\": " + Distancia.ToString() + ",\n" +
                 "\t\"Tempo\": " + Tempo.ToString() + ",\n" +
                 "\t\"Custo\": " + Custo.ToString() + "\n" +
-                "},\n";
+                "}";
 
             arquivo.Write(json);
         }

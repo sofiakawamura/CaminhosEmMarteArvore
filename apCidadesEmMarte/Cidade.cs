@@ -111,7 +111,7 @@ public class Cidade : IComparable<Cidade>, IRegistro
 
     public override String ToString()
     {
-        return nome.Trim();
+        return nome.Trim() + "\nCaminhos: " + Caminhos.QuantosNos.ToString();
     }
 
     public void GravarJSON(StreamWriter arquivo)
@@ -123,7 +123,7 @@ public class Cidade : IComparable<Cidade>, IRegistro
                 "\t\"Nome\": \"" + Nome + "\",\n" +
                 "\t\"X\": " + X.ToString().Replace(',', '.') + ",\n" +
                 "\t\"Y\": " + Y.ToString().Replace(',', '.') + "\n" +
-                "},\n";
+                "}";
 
             arquivo.Write(json);
         }
